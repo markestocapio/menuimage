@@ -1,1 +1,5 @@
 name = menuimage
+description = Provides field on Edit Menu Link form to upload an image. :: 2012.12.06
+core = 7.x
+dependencies[] = menu
+dependencies[] = image
