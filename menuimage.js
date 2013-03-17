@@ -1,6 +1,3 @@
-/**
- * Handlers for Upload and Remove buttons of Image field in menu item edit form.
- */
 (function ($) {
   Drupal.behaviors.menuimageUpload = {
     attach: function (context, settings) {
@@ -8,9 +5,7 @@
         var submitButton = $(event.target).find("input[type=submit]");
         var previewImage = $(event.target).parents(".fieldset-wrapper").find("img");
         var uploadedImage = $(event.target).find("span a");
-        $(uploadedImage).click(function (event) {
-          event.preventDefault();
-        });
+        $(uploadedImage).click(function (event) {event.preventDefault();});
         if (submitButton.length != 0 && previewImage.length != 0) {
           switch (submitButton[0].value) {
             case "Remove":
@@ -25,8 +20,6 @@
     }
   };
   $(document).ready(function () {
-    $('.form-item-menuimage .form-managed-file span a').click(function (event) {
-      event.preventDefault();
-    });
+    $('.form-item-menuimage .form-managed-file span a').click(function (event) {event.preventDefault();});
   });
 }) (jQuery);
