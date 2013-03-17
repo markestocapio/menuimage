@@ -11,9 +11,11 @@
             case "Remove":
               $($(previewImage[0])).attr("src", $(uploadedImage).attr("href")).attr("height", 75).removeAttr("width");
               break;
+
             case "Upload":
               $($(previewImage[0])).attr("src", Drupal.settings.menuimageBlank).attr({'width': 75, 'height': 75});
               break;
+
           }
         }
       });

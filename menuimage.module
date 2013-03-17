@@ -48,9 +48,9 @@ function menuimage_form_menu_edit_item_alter(&$form, &$form_state) {
         'imagepreview' => array(
           '#type' => "markup",
           '#markup' => '<div style="float: left; min-width: 75px; height: 75px; margin: 10px 20px 0px 0px; border: 1px solid #ccc;">' . theme("image", array(
-              'path' => ($file && $fid != 0 ? $file->uri : $blank),
-              'height' => 75,
-            ) ) . '</div>'
+            'path' => ($file && $fid != 0 ? $file->uri : $blank),
+            'height' => 75,
+          )) . '</div>',
         ),
         'menuimage' => array(
           '#type' => "managed_file",
@@ -61,8 +61,8 @@ function menuimage_form_menu_edit_item_alter(&$form, &$form_state) {
             'file_validate_size' => array(parse_size($size)),
           ),
           '#attached' => array('js' => array(drupal_get_path("module", "menuimage") . "/menuimage.js")),
-          '#default_value' => $fid
-        )
+          '#default_value' => $fid,
+        ),
       );
     }
   }
