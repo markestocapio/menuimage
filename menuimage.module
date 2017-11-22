@@ -38,6 +38,16 @@ function menuimage_form_menu_edit_item_alter(&$form, &$form_state) {
   $types = $temp['image']['instance_settings']['file_extensions'];
   $size = ini_get("upload_max_filesize");
   $temp = array();
+
+  $params = array(
+    'uri_scheme' => file_default_scheme(),
+    'file_directory' => variable_get('file_entity_default_file_directory', ''),
+  );
+
+  $destination = trim($params['file_directory'], '/');
+  $destination = token_replace($destination);
+  $location = $params['uri_scheme'] . '://' . $destination;
+
   foreach ($form as $name => $element) {
     $temp[$name] = $element;
     if ($name == "description") {
@@ -57,7 +67,7 @@ function menuimage_form_menu_edit_item_alter(&$form, &$form_state) {
         'menuimage' => array(
           '#type' => "managed_file",
           '#description' => t("Files must be less than <strong>@size</strong>.<br />Allowed file types: <strong>@types</strong>.", array('@size' => $size, '@types' => $types)),
-          '#upload_location' => "public://menuimage",
+          '#upload_location' => $location.'menuimage/',
           '#upload_validators' => array(
             'file_validate_extensions' => array($types),
             'file_validate_size' => array(parse_size($size)),
