@@ -76,6 +76,18 @@ function menuimage_form_menu_edit_item_alter(&$form, &$form_state) {
           '#default_value' => $fid,
         ),
       );
+
+      $temp['teaser'] = array(
+        '#type' => 'select',
+        '#title' => t('With Teaser'),
+        '#default_value' => (isset($options['content']['teaser']) ? $options['content']['teaser'] : 'no' ),
+        '#description' => t(''),
+        "#options" => array(
+        "no" => t("No"),
+        "yes" => t("Yes"),           
+      ),
+
+      );      
     }
   }
   $form = $temp;
@@ -120,6 +132,9 @@ function menuimage_edit_item_submit(&$form, &$form_state) {
           unset($options['content']['image']);
         }
       }
+
+      $options['content']['teaser'] = $form_state['values']['teaser'];
+
       $options = serialize($options);
       if ($options != $result) {
         db_update("menu_links")
